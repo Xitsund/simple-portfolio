@@ -1,52 +1,536 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Xitsunduxo Respect Ndhambi Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <base href="">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XR Career Guide | South Africa</title>
+  <style>
+    :root {
+      --primary: #174ea6;
+      --primary-dark: #103a7d;
+      --accent: #f4b400;
+      --bg: #f5f7fb;
+      --text: #172033;
+      --muted: #657084;
+      --card: #ffffff;
+      --border: #e4e8f0;
+      --success: #188038;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .menu {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .menu a:hover { color: var(--primary); }
+
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #174ea6, #2869c7);
+      color: white;
+      padding: 70px 20px;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.08;
+      margin: 12px 0 18px;
+    }
+
+    h2 { margin-top: 0; font-size: 1.8rem; }
+    h3 { margin-top: 0; }
+
+    .hero p {
+      max-width: 600px;
+      color: #e8efff;
+      font-size: 1.05rem;
+    }
+
+    .button {
+      display: inline-block;
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 18px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      background: var(--accent);
+      color: #1e2a3b;
+      margin-top: 12px;
+    }
+
+    .button.secondary {
+      background: white;
+      color: var(--primary);
+      margin-left: 8px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 18px;
+      padding: 28px;
+    }
+
+    .hero-card strong {
+      display: block;
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 55px 20px;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 28px;
+    }
+
+    .section-heading p { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      box-shadow: 0 5px 18px rgba(23, 32, 51, 0.04);
+    }
+
+    .icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #eaf1ff;
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+    .card p { color: var(--muted); }
+
+    .guide {
+      background: white;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    form {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 720px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 18px 0 7px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd3e1;
+      border-radius: 8px;
+      font: inherit;
+      background: white;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      border-left: 4px solid var(--success);
+      background: #edf8f0;
+      border-radius: 8px;
+    }
+
+    .result h3 { color: var(--success); }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .link-item {
+      display: block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 700;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 18px;
+      border-radius: 10px;
+    }
+
+    .link-item span {
+      display: block;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .notice {
+      margin-top: 22px;
+      background: #fff8e1;
+      border: 1px solid #f1df9b;
+      border-radius: 10px;
+      padding: 16px;
+      color: #604b00;
+    }
+
+    footer {
+      background: #101b30;
+      color: #dce5f7;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    footer p { margin: 5px 0; }
+
+    @media (max-width: 800px) {
+      .hero-content { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .links { grid-template-columns: 1fr; }
+      .menu-toggle { display: block; }
+      .menu {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: white;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .menu.open { display: flex; }
+      .button.secondary { margin-left: 0; }
+    }
+  </style>
 </head>
-<body style="background-image: c:\Users\Solomon Ndhambi\Downloads\rise.jpg;">
-    <header>
-        <h1>Xitsunduxo Respect Ndhambi</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<body>
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="#home">XR Career Guide</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+      <div class="menu" id="menu">
+        <a href="#home">Home</a>
+        <a href="#careers">Careers</a>
+        <a href="#requirements">Requirements</a>
+        <a href="#applications">Applications</a>
+      </div>
+    </nav>
+  </header>
 
-    <main>
-        <section id="about">   
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div>
+          <div class="eyebrow">Your future starts here</div>
+          <h1>Find a career that fits your future.</h1>
+          <p>
+            Explore career options, understand course requirements,
+            and discover official university and college application resources
+            across South Africa.
+          </p>
+          <a class="button" href="#career-finder">Find My Career</a>
+          <a class="button secondary" href="#applications">Apply Guide</a>
+        </div>
+        <div class="hero-card">
+          <strong>🇿🇦</strong>
+          <h3>Study. Plan. Succeed.</h3>
+          <p>Make informed decisions about your next education or career step.</p>
+        </div>
+      </div>
+    </section>
 
-            <h2>About</h2>   
+    <section class="container" id="careers">
+      <div class="section-heading">
+        <h2>Explore your options</h2>
+        <p>Learn about different study and career pathways before making your decision.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="icon">💻</div>
+          <h3>Information Technology</h3>
+          <p>Explore programming, networking, cybersecurity, software and computer systems.</p>
+        </article>
+        <article class="card">
+          <div class="icon">⚙️</div>
+          <h3>Engineering</h3>
+          <p>Discover electrical, mechanical, civil and other engineering pathways.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🏥</div>
+          <h3>Health Sciences</h3>
+          <p>Learn about healthcare-related studies and their admission requirements.</p>
+        </article>
+        <article class="card">
+          <div class="icon">📊</div>
+          <h3>Business</h3>
+          <p>Explore accounting, finance, management, marketing and entrepreneurship.</p>
+        </article>
+        <article class="card">
+          <div class="icon">📚</div>
+          <h3>Education</h3>
+          <p>Explore teaching and education-related qualifications.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🔧</div>
+          <h3>TVET College Studies</h3>
+          <p>Learn about vocational and occupational training opportunities.</p>
+        </article>
+      </div>
+    </section>
 
-            <img src="c:\Users\Solomon Ndhambi\Downloads\ndhambi.jpj.jpeg" alt="Your headshot">
-            <p>Being a 23-year-old student pursuing robotics at Sedibeng TVET College is a great accomplishment. Robotics is a rapidly growing field with exciting opportunities.
+    <section class="guide" id="career-finder">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Career Finder</h2>
+          <p>Answer these questions to receive an introductory career direction. This is guidance, not a formal aptitude test.</p>
+        </div>
 
-              What specifically interests you about robotics? Are you drawn to the technical aspects, the potential applications, or something else entirely?
-              
-              Do you have any particular projects or goals in mind for your studies? Perhaps you're interested in building a robot, learning a specific programming language, or exploring a particular area of robotics research.
-              
-              Feel free to share more about your experiences and aspirations. I'm here to support you and help you achieve your goals..</p>
-        </section>
+        <form id="careerForm">
+          <label for="interest">What area interests you most?</label>
+          <select id="interest" required>
+            <option value="">Choose an area</option>
+            <option value="technology">Technology and computers</option>
+            <option value="engineering">Building, machines and engineering</option>
+            <option value="health">Helping people and healthcare</option>
+            <option value="business">Business and money</option>
+            <option value="education">Teaching and communication</option>
+            <option value="practical">Practical and technical work</option>
+          </select>
 
-        <section id="portfolio">
-            <h2></h2>
-            </section>
+          <label for="learning">How do you prefer to learn?</label>
+          <select id="learning" required>
+            <option value="">Choose an option</option>
+            <option value="theory">Reading and theory</option>
+            <option value="practical">Practical activities</option>
+            <option value="both">A mixture of both</option>
+          </select>
 
-        <section id="contact">
-            <h2>Contact</h2>  
-            <p>xitsunduxorespect@gmail.com</p>
-            <p>0733848723</p>
-            </section>
-    </main>
+          <label for="level">What is your current education level?</label>
+          <select id="level" required>
+            <option value="">Choose your level</option>
+            <option value="school">School learner</option>
+            <option value="matric">Completed Grade 12</option>
+            <option value="college">College student or graduate</option>
+            <option value="other">Other</option>
+          </select>
 
-    <footer>
-        &copy; 2023 Xitsunduxo Respect Ndhambi
-    </footer>
+          <button class="button" type="submit">Show Career Direction</button>
 
-    <script src="script.js"></script> </body>
+          <div class="result" id="careerResult" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="container" id="requirements">
+      <div class="section-heading">
+        <h2>Course admission requirements</h2>
+        <p>Admission criteria differ by institution and qualification. Always verify the current requirements with the institution.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Universities</h3>
+          <p>Check APS or other scoring systems, subject requirements, minimum marks and programme-specific criteria.</p>
+        </article>
+        <article class="card">
+          <h3>Universities of Technology</h3>
+          <p>Review qualification requirements, subject combinations and any additional selection processes.</p>
+        </article>
+        <article class="card">
+          <h3>TVET Colleges</h3>
+          <p>Check the entry level for the specific NC(V), Report 191 or occupational programme.</p>
+        </article>
+      </div>
+      <div class="notice">
+        <strong>Important:</strong> Meeting a minimum requirement does not always guarantee admission. Requirements and available places can change.
+      </div>
+    </section>
+
+    <section class="guide" id="applications">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Official application resources</h2>
+          <p>Use official websites to confirm application dates, requirements and application procedures.</p>
+        </div>
+        <div class="links">
+          <a class="link-item" href="https://www.gov.za/" target="_blank" rel="noopener noreferrer">
+            South African Government
+            <span>Government information and services</span>
+          </a>
+          <a class="link-item" href="https://www.education.gov.za/" target="_blank" rel="noopener noreferrer">
+            Department of Basic Education
+            <span>School education information</span>
+          </a>
+          <a class="link-item" href="https://www.dhet.gov.za/" target="_blank" rel="noopener noreferrer">
+            Department of Higher Education and Training
+            <span>Higher education and TVET information</span>
+          </a>
+          <a class="link-item" href="https://www.cao.ac.za/" target="_blank" rel="noopener noreferrer">
+            Central Applications Office
+            <span>Application information for participating institutions</span>
+          </a>
+        </div>
+        <div class="notice">
+          Application deadlines vary by institution and programme. XR Career Guide should verify and update deadlines before publishing them as current.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>XR Career Guide</strong></p>
+    <p>Helping people explore education and career opportunities in South Africa.</p>
+    <p>© <span id="year"></span> XR Career Guide</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("menu");
+
+    menuToggle.addEventListener("click", () => {
+      menu.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".menu a").forEach(link => {
+      link.addEventListener("click", () => menu.classList.remove("open"));
+    });
+
+    const recommendations = {
+      technology: {
+        title: "Technology career direction",
+        text: "Explore Information Technology, Computer Science, Software Development, Networking or Cybersecurity. Compare the mathematics and subject requirements for each programme."
+      },
+      engineering: {
+        title: "Engineering career direction",
+        text: "Explore Mechanical, Electrical, Civil or Robotics Engineering. Mathematics and Physical Sciences may be required for many programmes, so check each institution's criteria."
+      },
+      health: {
+        title: "Health sciences career direction",
+        text: "Explore Nursing, Emergency Medical Care, Medical Laboratory Sciences and other health-related qualifications. Requirements and selection processes differ significantly."
+      },
+      business: {
+        title: "Business career direction",
+        text: "Explore Accounting, Finance, Business Management, Marketing and Entrepreneurship. Compare the subjects, points and qualification types required."
+      },
+      education: {
+        title: "Education career direction",
+        text: "Explore teaching qualifications and education-related studies. Check the required subjects, admission score and programme-specific criteria."
+      },
+      practical: {
+        title: "Practical and technical career direction",
+        text: "Explore TVET college programmes, engineering-related trades, occupational certificates and practical technical training."
+      }
+    };
+
+    document.getElementById("careerForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const interest = document.getElementById("interest").value;
+      const learning = document.getElementById("learning").value;
+      const level = document.getElementById("level").value;
+      const result = document.getElementById("careerResult");
+
+      const recommendation = recommendations[interest];
+
+      result.innerHTML = `
+        <h3>${recommendation.title}</h3>
+        <p>${recommendation.text}</p>
+        <p><strong>Your learning preference:</strong> ${learning === "both" ? "Theory and practical work" : learning === "practical" ? "Practical activities" : "Reading and theory"}.</p>
+        <p><strong>Your education level:</strong> ${level === "school" ? "School learner" : level === "matric" ? "Completed Grade 12" : level === "college" ? "College student or graduate" : "Other"}.</p>
+        <p>Next step: compare at least two institutions and confirm their official admission requirements.</p>
+      `;
+
+      result.style.display = "block";
+      result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
